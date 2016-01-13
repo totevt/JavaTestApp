@@ -1,0 +1,32 @@
+<project name="test.jar" basedir="." default="build-jar">
+	<property name="jdk.home" value="C:\\java\\jdk1.7.0_67" />
+	   
+	<property name="jar.exec" value="${jdk.home}/bin/jar.exe" />
+	<property name="javac.exec" value="${jdk.home}/bin/javac.exe" />
+
+	<property name="target" value="1.7" />
+	<property name="source" value="1.7" />
+
+	<path id="test.classpath">
+		<pathelement location="bin" />
+	</path>
+
+	<description>
+		Generate test.jar
+	</description>
+
+	<target name="build-jar">
+	    <echo>${jar.exec}</echo>
+		<delete dir="bin" failonerror="false" />
+		<mkdir dir="bin" />
+		<delete dir="distributable" failonerror="false" />
+		<mkdir dir="distributable" />
+		
+		<javac debug="false" destdir="bin" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="test.classpath" />
+		</javac>
+
+		<jar destfile="distributable/test.jar" basedir="bin"/>
+	</target>
+</project>
